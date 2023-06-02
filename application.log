@@ -1,0 +1,1 @@
+2023-06-02T14:31:08.124-07:00  WARN 16392 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
