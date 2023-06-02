@@ -36,3 +36,4 @@ build/
 *.properties
 *DS_Store/
 src/main/resources/app.log
+src/main/resources/application.properties
