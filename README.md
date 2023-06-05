@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a Java and Angular based pet store application. The application will be primarily built using Java, Angular, and Spring while utilizing a PostgreSQL database to store animal and user information.
+This is a Java and Angular based pet store web application. The web application will be primarily built using Java, Angular, and Spring while utilizing a PostgreSQL database to store animal and user information.
 
 ## User Stories
 
