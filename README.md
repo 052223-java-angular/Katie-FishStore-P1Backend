@@ -14,6 +14,7 @@ This is a Java and Angular based pet store web application. The web application 
 *	**As a user**, I want to view my favorited pets on my profile page.
 *	**As a user**, I want to add animals to my shopping cart so that I can purchase them later.
 *	**As a user**, I want to modify the quantity or remove animals from my cart so that I can make changes before finalizing the purchase.
+*	**As a user**, I want to view and leave reviews on pets purchased.
 *	**As a user**, I want to check out and pay for my order securely so that my personal and financial information is safe.
 *	**As a user**, I want to view my order history so I can keep track of my purchases.
 
@@ -22,6 +23,7 @@ This is a Java and Angular based pet store web application. The web application 
 *	User registration and login
 *	Browsing and searching for pets
 *	Favoriting feature and viewing favorites
+*	Product rating and reviewing.
 *	Adding products to a shopping cart
 *	Modifying the shopping cart
 *	Secure payment process
@@ -29,7 +31,7 @@ This is a Java and Angular based pet store web application. The web application 
 
 ## Stretch Goal
 
-*	Product rating and reviewing.
+*	Profile picture
 *	Adding an admin role to add, remove, or modify the store.
 
 ## Tech Stack
