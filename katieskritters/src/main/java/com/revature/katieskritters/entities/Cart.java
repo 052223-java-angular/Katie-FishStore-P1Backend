@@ -1,7 +1,5 @@
 package com.revature.katieskritters.entities;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
