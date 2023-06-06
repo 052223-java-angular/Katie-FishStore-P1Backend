@@ -26,6 +26,17 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class User {
+
+    public User(String firstName, String lastName, String email, String username, String password, Role role) {
+        // this.user_id = user_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @Id
     private String user_id;
 

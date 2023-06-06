@@ -13,9 +13,9 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByUserId(String user_id);
 
-    Optional<User> isUsernameValid(String username);
+    // Optional<User> isUsernameValid(String username);
 
-    Optional<User> isPasswordValid(String password);
+    // Optional<User> isPasswordValid(String password);
 
-    Optional<User> isConfirmPasswordSame(String confirmedPassword);
+    // Optional<User> isConfirmPasswordSame(String confirmedPassword);
 }
