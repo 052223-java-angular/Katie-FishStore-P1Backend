@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AnimalService {
-    private final AnimalService animalService;
+public class FishService {
+    private final FishService fishService;
 
 }
