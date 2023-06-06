@@ -1,8 +1,6 @@
 package com.revature.katieskritters.services;
 
-import java.lang.module.ResolutionException;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -12,7 +10,6 @@ import com.revature.katieskritters.entities.Role;
 import com.revature.katieskritters.entities.User;
 import com.revature.katieskritters.repositories.UserRepository;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lombok.AllArgsConstructor;
@@ -23,16 +20,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
 
-    // public User registerUser(String firstName, String lastName, String email,
-    // String username, String password) {
-    // Role role = roleService.findByName("USER");
-    // String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-    // // String user_id = UUID.randomUUID().toString();
-    // User user = new User(firstName, lastName, email, username, hashed, role);
-    // userRepository.save(user);
-    // return user;
-    // }
-
     public User registerUser(NewUserRequest request) {
         Role role = roleService.findByName("USER");
         String hashed = BCrypt.hashpw(request.getPassword(), BCrypt.gensalt());
@@ -42,28 +29,6 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
-
-    // public boolean isFirstNameNull(String firstName) {
-    // try {
-    // if (user.getFirstName().isEmpty()) {
-    // return false;
-    // }
-    // this.userRepository.save(firstName);
-    // } catch (ResolutionException re) {
-    // re.getMessage("Please enter your first name.");
-    // }
-    // }
-
-    // public boolean isLastNameNull(String lastName) {
-    // try {
-    // if (lastName.isEmpty()) {
-    // return false;
-    // }
-    // this.userRepository.save(lastName);
-    // } catch (ResolutionException re) {
-    // re.getMessage("Please enter your first name.");
-    // }
-    // }
 
     // checks for email validation
     public boolean isEmailValid(String email) {
