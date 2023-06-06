@@ -1,27 +1,27 @@
-# Katie-PetStore-P1
+# Katie-FishStore-P1
 
 ## Introduction
 
-This is a Java and Angular based pet store web application. The web application will be primarily built using Java, Angular, and Spring while utilizing a PostgreSQL database to store animal and user information.
+This is a Java and Angular based fish store web application. The web application will be primarily built using Java, Angular, and Spring while utilizing a PostgreSQL database to store animal and user information.
 
 ## User Stories
 
 *	**As a user**, I want to register an account so that I can have a personalized shopping experience.
-*	**As a user**, I want to login to my personalized account so I can see animals I’m interested in.
-*	**As a user**, I want to browse through animals when logged in.
-*	**As a user**, I want to search for animals by species, breed, gender, and price.
-*	**As a user**, I want to add pets to my favorites while browsing to save a pet to my profile so I can find them quicker next time.
-*	**As a user**, I want to view my favorited pets on my profile page.
-*	**As a user**, I want to add animals to my shopping cart so that I can purchase them later.
-*	**As a user**, I want to modify the quantity or remove animals from my cart so that I can make changes before finalizing the purchase.
-*	**As a user**, I want to view and leave reviews on pets purchased.
-*	**As a user**, I want to check out and pay for my order securely so that my personal and financial information is safe.
+*	**As a user**, I want to login to my personalized account so I can see fish I’m interested in.
+*	**As a user**, I want to browse through fish when logged in.
+*	**As a user**, I want to search for a fish by type, gender, and price.
+*	**As a user**, I want to add fish to my favorites while browsing to save a fish to my profile so I can find them quicker next time.
+*	**As a user**, I want to view my favorited fish on my profile page.
+*	**As a user**, I want to add fish to my shopping cart so that I can purchase them later.
+*	**As a user**, I want to modify the quantity or remove fish from my cart so that I can make changes before finalizing the purchase.
+*	**As a user**, I want to view and leave reviews on fish purchased.
+*	**As a user**, I want to checkout and pay for my order securely so that my personal and financial information is safe.
 *	**As a user**, I want to view my order history so I can keep track of my purchases.
 
 ## MVP (Minimum Viable Product)
 
 *	User registration and login
-*	Browsing and searching for pets
+*	Browsing and searching for fish
 *	Favoriting feature and viewing favorites
 *	Product rating and reviewing.
 *	Adding products to a shopping cart
@@ -39,7 +39,7 @@ This is a Java and Angular based pet store web application. The web application 
 *	**Java**: The main programming language used for building the application.
 *	**Spring Boot**: Has the beans.
 *	**Angular**: Front end
-*	**PostgreSQL**: Used as the database to store user, pet, and order data.
+*	**PostgreSQL**: Used as the database to store user, fish, and order data.
 *	**Maven**: Used for managing project dependencies.
 *	**Junit**: A testing framework for Java applications, used to ensure our code works as expected.
 *	**Log4j**: A logging utility for debugging purposes.
@@ -47,6 +47,7 @@ This is a Java and Angular based pet store web application. The web application 
 *	**BCrypt**: A Java library for hashing and checking passwords for security.
 *	**Mockito, Junit, and PowerMock**: Used for unit and integration testing.
 *	**Git and GitHub**: Used for version control. The hub that controls all the Gits.
+* **Fish Species API**: Used for fish pictures and names.
 
 ## Requirements
 
