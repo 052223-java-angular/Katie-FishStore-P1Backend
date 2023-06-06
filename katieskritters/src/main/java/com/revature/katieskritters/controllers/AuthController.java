@@ -28,28 +28,30 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody NewUserRequest request) {
-        // check for unique username, if not throw exception
-        if (!userService.isUniqueUsername(request.getUsername())) {
-            throw new ResolutionException("Username is not unique!");
-        }
-        // username is valid
-        if (!userService.isUsernameValid(request.getUsername())) {
-            throw new ResolutionException("Username is not valid!");
-        }
-        // check if password is valid, if not throw exception
-        if (!userService.isPasswordValid(request.getPassword())) {
-            throw new ResolutionException("Password is not valid!");
-        }
-        // check password and confirm password are the same, if not throw exception
-        if (!userService.isConfirmPasswordSame(request.getPassword().getConfirmedPassword())) {
-            throw new ResolutionException("Passwords do not match!");
-        }
-        // if everything checks out, register user
-        userService.register(request);
-        // success status code for registering user
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // public ResponseEntity<?> registerUser(@RequestBody NewUserRequest request) {
+    // // check for unique username, if not throw exception
+    // if (!userService.isUniqueUsername(request.getUsername())) {
+    // throw new ResolutionException("Username is not unique!");
+    // }
+    // // username is valid
+    // if (!userService.isUsernameValid(request.getUsername())) {
+    // throw new ResolutionException("Username is not valid!");
+    // }
+    // // check if password is valid, if not throw exception
+    // if (!userService.isPasswordValid(request.getPassword())) {
+    // throw new ResolutionException("Password is not valid!");
+    // }
+    // // check password and confirm password are the same, if not throw exception
+    // if
+    // (!userService.isConfirmPasswordSame(request.getPassword().getConfirmedPassword()))
+    // {
+    // throw new ResolutionException("Passwords do not match!");
+    // }
+    // // if everything checks out, register user
+    // userService.register(request);
+    // // success status code for registering user
+    // return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
     // dto = data transfer object
 
     // @GetMapping("/get")

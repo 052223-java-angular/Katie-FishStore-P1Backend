@@ -29,6 +29,15 @@ public class User {
     @Id
     private String user_id;
 
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
     // set the column username to username
     @Column(name = "username", nullable = false)
     private String username;
@@ -48,7 +57,11 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<Favorite> favorite;
+    private Set<Review> review;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Favorite favorite;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference

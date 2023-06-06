@@ -20,21 +20,21 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "cart _items")
-public class CartItem {
+@Table(name = "reviews")
+public class Review {
     @Id
-    private String cartItem_id;
+    private String review_id;
 
     @Column(nullable = false)
-    private int quantity;
+    private String rating;
 
     @Column(nullable = false)
-    private int price;
+    private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Cart cart;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "fish_id")

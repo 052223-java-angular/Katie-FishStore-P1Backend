@@ -18,12 +18,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
 
-    public User register(String username, String password) {
-        Role role = roleService.findByName("USER");
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-        User user = new User(username, hashed, role.getRole_id());
-        return userRepository.save(user);
-    }
+    // public User register(String username, String password) {
+    // Role role = roleService.findByName("USER");
+    // String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+    // User user = new User(username, hashed, role.getRole_id());
+    // return userRepository.save(user);
+    // }
 
     public boolean isUniqueUsername(String username) {
         Optional<User> userOpt = userRepository.findByUsername(username);

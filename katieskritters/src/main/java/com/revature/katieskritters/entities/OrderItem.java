@@ -37,8 +37,7 @@ public class OrderItem {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "animal_id")
+    @JoinColumn(name = "fish_id")
     @JsonBackReference
-    private Animal animal;
-
+    private Fish fish;
 }
