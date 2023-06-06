@@ -23,28 +23,29 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
 
-    public User registerUser(String firstName, String lastName, String email, String username, String password) {
-        Role role = roleService.findByName("USER");
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-        // String user_id = UUID.randomUUID().toString();
-        User user = new User(firstName, lastName, email, username, hashed, role);
-        userRepository.save(user);
-        return user;
-    }
-    // MAKE THIS ONE WORK
-    // public User registerUser(NewUserRequest request) {
+    // public User registerUser(String firstName, String lastName, String email,
+    // String username, String password) {
     // Role role = roleService.findByName("USER");
     // String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
     // // String user_id = UUID.randomUUID().toString();
-    // User user = new User(firstName, lastName, email, request.getUsername(),
-    // hashed, role);
+    // User user = new User(firstName, lastName, email, username, hashed, role);
     // userRepository.save(user);
     // return user;
     // }
 
+    public User registerUser(NewUserRequest request) {
+        Role role = roleService.findByName("USER");
+        String hashed = BCrypt.hashpw(request.getPassword(), BCrypt.gensalt());
+        // String user_id = UUID.randomUUID().toString();
+        User user = new User(request.getFirstName(), request.getLastName(), request.getEmail(), request.getUsername(),
+                hashed, role);
+        userRepository.save(user);
+        return user;
+    }
+
     // public boolean isFirstNameNull(String firstName) {
     // try {
-    // if (firstName.isEmpty()) {
+    // if (user.getFirstName().isEmpty()) {
     // return false;
     // }
     // this.userRepository.save(firstName);

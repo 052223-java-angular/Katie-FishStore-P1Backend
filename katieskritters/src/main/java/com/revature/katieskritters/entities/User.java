@@ -1,6 +1,7 @@
 package com.revature.katieskritters.entities;
 
 import java.util.Set;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,16 +27,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class User {
-
-    public User(String firstName, String lastName, String email, String username, String password, Role role) {
-        // this.user_id = user_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     @Id
     private String user_id;
@@ -77,5 +68,15 @@ public class User {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Cart cart;
+
+    public User(String firstName, String lastName, String email, String username, String password, Role role) {
+        this.user_id = UUID.randomUUID().toString();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
 }
