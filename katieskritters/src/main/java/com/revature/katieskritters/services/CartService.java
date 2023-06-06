@@ -2,8 +2,6 @@ package com.revature.katieskritters.services;
 
 import org.springframework.stereotype.Service;
 
-import com.revature.katieskritters.entities.Cart;
-
 import lombok.AllArgsConstructor;
 
 @Service

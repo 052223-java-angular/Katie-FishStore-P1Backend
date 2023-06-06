@@ -7,5 +7,5 @@ import com.revature.katieskritters.entities.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, String> {
-
+    Order findAllByUsername(String username);
 }
