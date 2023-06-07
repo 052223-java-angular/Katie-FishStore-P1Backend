@@ -55,13 +55,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Principal> login(@RequestBody NewLoginRequest request) {
-
         Principal principal = userService.loginUser(request);
-
         String token = tokenService.generateToken(principal);
-
         principal.setToken(token);
-
         return ResponseEntity.status(HttpStatus.OK).body(principal);
 
     }

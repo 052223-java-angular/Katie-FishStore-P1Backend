@@ -1,6 +1,6 @@
 package com.revature.katieskritters.dtos.responses;
 
-import org.apache.catalina.User;
+import com.revature.katieskritters.entities.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +15,14 @@ import lombok.ToString;
 @ToString
 public class Principal {
     private String id;
+    private String firstName;
     private String username;
     private String role;
     private String token;
 
     public Principal(User user) {
-        this.id = user.getUser_id();
-        this.id = user.getFullName();
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
         this.username = user.getUsername();
         this.role = user.getRole().getName();
 

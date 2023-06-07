@@ -58,4 +58,8 @@ public class User {
         this.role = role;
     }
 
+    public String getId() {
+        return this.user_id;
+    }
+
 }
