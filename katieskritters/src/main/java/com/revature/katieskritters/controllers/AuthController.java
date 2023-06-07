@@ -1,6 +1,5 @@
 package com.revature.katieskritters.controllers;
 
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.katieskritters.dtos.requests.NewLoginRequest;
 import com.revature.katieskritters.dtos.requests.NewUserRequest;
+import com.revature.katieskritters.dtos.responses.Principal;
+import com.revature.katieskritters.services.JwtTokenService;
 import com.revature.katieskritters.services.UserService;
 import com.revature.katieskritters.utils.customExceptions.ResourceConflictException;
+import com.revature.katieskritters.utils.customExceptions.UserNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -24,15 +27,15 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
+    private final JwtTokenService tokenService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody NewUserRequest request) {
+    public ResponseEntity<?> register(@RequestBody NewUserRequest request) {
         // check for unique username, if not throw exception
-    // check for unique username, if not throw exception
         if (!userService.isUniqueUsername(request.getUsername())) {
             throw new ResourceConflictException("Username is not unique!");
         }
-        // username is valid
+        // check for valid username, if not throw exception
         if (!userService.isUsernameValid(request.getUsername())) {
             throw new ResourceConflictException("Username is not valid!");
         }
@@ -50,12 +53,28 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Principal> login(@RequestBody NewLoginRequest request) {
+        Principal principal = userService.loginUser(request);
+        String token = tokenService.generateToken(principal);
+        principal.setToken(token);
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
+
+    }
+
     @ExceptionHandler(ResourceConflictException.class)
-    public ResponseEntity<Map<String, Object>> 
-    handleResourceConflictException(ResourceConflictException e) {
+    public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", new Date(System.currentTimeMillis()));
         map.put("message", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(map);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException ex) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("timestamp", new Date(System.currentTimeMillis()));
+        map.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
     }
 }
