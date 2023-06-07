@@ -5,10 +5,13 @@ import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import com.revature.katieskritters.dtos.requests.NewLoginRequest;
 import com.revature.katieskritters.dtos.requests.NewUserRequest;
+import com.revature.katieskritters.dtos.responses.Principal;
 import com.revature.katieskritters.entities.Role;
 import com.revature.katieskritters.entities.User;
 import com.revature.katieskritters.repositories.UserRepository;
+import com.revature.katieskritters.utils.customExceptions.UserNotFoundException;
 
 import java.util.regex.Pattern;
 
@@ -28,6 +31,19 @@ public class UserService {
                 hashed, role);
         userRepository.save(user);
         return user;
+    }
+
+    public Principal loginUser(NewLoginRequest request) {
+        Optional<User> userOpt = userRepository.findByUsername(request.getUsername());
+
+        if (userOpt.isPresent()) {
+            User userLogin = userOpt.get();
+            if (BCrypt.checkpw(request.getPassword(), userLogin.getPassword())) {
+                return new Principal(userLogin);
+            }
+        }
+
+        throw new UserNotFoundException("Invalid credentials!");
     }
 
     // checks for email validation
