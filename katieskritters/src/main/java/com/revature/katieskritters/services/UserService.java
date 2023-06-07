@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.PrincipalMethodArgumentResolver;
 
 import com.revature.katieskritters.dtos.requests.NewLoginRequest;
 import com.revature.katieskritters.dtos.requests.NewUserRequest;
