@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.revature.katieskritters.dtos.requests.NewBrowseRequest;
 import com.revature.katieskritters.entities.Fish;
 import com.revature.katieskritters.repositories.FishRepository;
 
@@ -15,10 +14,13 @@ import lombok.AllArgsConstructor;
 public class FishService {
     private final FishRepository fishRepository;
 
-    public List<Fish> findAllById(NewBrowseRequest request) {
-        List<Fish> fish = fishRepository.findAllById(request.getId());
-
+    public List<Fish> findAll() {
+        List<Fish> fish = fishRepository.findAll();
         return fish;
+    }
 
+    public List<Fish> searchFish(String name) {
+        List<Fish> fish = fishRepository.findByNameContaining(name);
+        return fish;
     }
 }
