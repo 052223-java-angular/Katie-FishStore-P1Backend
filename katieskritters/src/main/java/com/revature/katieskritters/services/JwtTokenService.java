@@ -19,7 +19,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 
-
 @Service
 public class JwtTokenService {
     @Value("${jwt.secret}")
@@ -42,15 +41,18 @@ public class JwtTokenService {
     // parse the token and extract the user information
     public Principal parseToken(String token) {
         try {
+            // parse token and extract claim
             Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+            // create new principal object
             Principal principal = new Principal();
+            // set properties of new principal object
             principal.setId(claims.get("id").toString());
             principal.setUsername(claims.getSubject());
             principal.setRole(claims.get("role").toString());
+            // return principal object
             return principal;
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException e) {
             throw new JwtException("Invalid token");
         }
     }
-
 }

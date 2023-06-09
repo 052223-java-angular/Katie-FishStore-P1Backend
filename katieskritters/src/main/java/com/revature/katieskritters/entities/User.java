@@ -3,12 +3,15 @@ package com.revature.katieskritters.entities;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,12 +46,18 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonBackReference
     private Role role;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Favorite favorite;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Cart cart;
 
     public User(String firstName, String lastName, String email, String username, String password, Role role) {
         this.user_id = UUID.randomUUID().toString();
