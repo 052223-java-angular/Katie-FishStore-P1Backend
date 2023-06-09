@@ -1,6 +1,7 @@
 package com.revature.katieskritters.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,17 @@ public class FishService {
         List<Fish> fish = fishRepository.findByNameContaining(name);
         return fish;
     }
+
+    public Fish findById(int id) {
+        Optional<Fish> optionalFish = fishRepository.findById(id);
+        
+        if (optionalFish.isPresent()) {
+            return optionalFish.get();
+        } else {
+            throw new RuntimeException("Fish not found!");
+        }
+    }
+
+
+
 }

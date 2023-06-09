@@ -12,6 +12,14 @@ import com.revature.katieskritters.dtos.responses.Principal;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+
+
 @Service
 public class JwtTokenService {
     @Value("${jwt.secret}")
@@ -31,31 +39,18 @@ public class JwtTokenService {
                 .compact();
     }
 
-    // public boolean validateToken(String token, Principal usePrincipal) {
-    // String tokenUsername = extractUsername(token);
-    // return (tokenUsername.equals(usePrincipal.getUsername()));
-    // }
+    // parse the token and extract the user information
+    public Principal parseToken(String token) {
+        try {
+            Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+            Principal principal = new Principal();
+            principal.setId(claims.get("id").toString());
+            principal.setUsername(claims.getSubject());
+            principal.setRole(claims.get("role").toString());
+            return principal;
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException e) {
+            throw new JwtException("Invalid token");
+        }
+    }
 
-    // // public String extractUsername(String token) {
-    // // return extractClaim(token, Claims::getSubject);
-    // // }
-
-    // // public <T> T extractClaim(String token, Function<Claims, T>
-    // claimsResolver) {
-    // // final Claims claims = extractAllClaims(token);
-    // // return claimsResolver.apply(claims);
-    // // }
-
-    // public Claims extractAllClaims(String token) {
-    // return
-    // Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-    // }
-
-    // public String extraUserId(String token) {
-    // return (String) extractAllClaims(token).get("id");
-    // }
-
-    // public String extraUserRole(String token) {
-    // return (String) extractAllClaims(token).get("role");
-    // }
 }
