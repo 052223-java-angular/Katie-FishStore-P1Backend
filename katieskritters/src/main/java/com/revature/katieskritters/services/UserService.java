@@ -80,4 +80,14 @@ public class UserService {
     public boolean isConfirmPasswordSame(String password, String confirmedPassword) {
         return password.equals(confirmedPassword);
     }
+
+    public User findById(String id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new RuntimeException("User not found!");
+        }
+    }
 }
