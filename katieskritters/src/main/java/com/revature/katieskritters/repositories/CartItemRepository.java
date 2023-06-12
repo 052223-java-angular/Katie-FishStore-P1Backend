@@ -1,16 +1,13 @@
 package com.revature.katieskritters.repositories;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.revature.katieskritters.entities.CartItem;
+import com.revature.katieskritters.entities.Cart;
 import com.revature.katieskritters.entities.Fish;
 
-@Repository
-public interface CartItemRepository extends JpaRepository<CartItem, String> {
-    List<CartItem> findAllByFish(Fish fish);
-
-    CartItem update(CartItem updatedItem);
+public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+    Optional<CartItem> findByCartAndFish(Cart cart, Fish fish);
 }

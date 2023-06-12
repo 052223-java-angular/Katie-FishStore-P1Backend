@@ -1,9 +1,9 @@
 package com.revature.katieskritters.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,24 +20,20 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "cart_items")
+@Table(name = "cart_item")
 public class CartItem {
     @Id
-    private String cartItem_id;
-
-    @Column(nullable = false)
-    private int quantity;
-
-    @Column(nullable = false)
-    private int price;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
-    @JsonBackReference
+    @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "fish_id")
-    @JsonBackReference
+    @JoinColumn(name = "fish_id", nullable = false)
     private Fish fish;
+
+    @Column(nullable = false)
+    private int quantity;
 }

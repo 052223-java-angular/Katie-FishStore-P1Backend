@@ -1,17 +1,14 @@
 package com.revature.katieskritters.entities;
 
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,26 +16,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 public class Cart {
     @Id
-    private String cart_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int cart_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> cartItems = new HashSet<>();
 
     @Column(nullable = false)
-    private String total;
+    private double total;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<CartItem> cartItem;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
+    // update total cost in cart
+    public void updateTotal() {
+        this.total = getCartItems().stream().mapToDouble(item -> item.getFish().getPrice() * item.getQuantity()).sum();
+    }
 }
