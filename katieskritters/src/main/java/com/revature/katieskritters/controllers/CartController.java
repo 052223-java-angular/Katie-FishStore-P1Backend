@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.katieskritters.dtos.requests.FishQuantityDto;
+import com.revature.katieskritters.dtos.requests.NewFishRequest;
 import com.revature.katieskritters.dtos.responses.Principal;
 import com.revature.katieskritters.entities.Cart;
 
@@ -24,7 +24,6 @@ import com.revature.katieskritters.services.CartService;
 import com.revature.katieskritters.services.FishService;
 import com.revature.katieskritters.services.JwtTokenService;
 import com.revature.katieskritters.services.UserService;
-
 
 import lombok.AllArgsConstructor;
 
@@ -37,6 +36,13 @@ public class CartController {
     private final FishService fishService;
     private final JwtTokenService jwtTokenService;
 
+    /*
+     * @param extract token from "Authorization" header
+     * 
+     * @return extracted token if no exception occurs
+     * 
+     * @author Katie Osborne
+     */
     private String extractToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -45,21 +51,18 @@ public class CartController {
         return authHeader.substring(7);
     }
 
-
     @GetMapping
-    public ResponseEntity<List<FishQuantityDto>> getCartItems(HttpServletRequest request) {
+    public ResponseEntity<List<NewFishRequest>> getCartItems(HttpServletRequest request) {
         String token = extractToken(request);
         Principal principal = jwtTokenService.parseToken(token);
         User user = userService.findById(principal.getId());
-    
+
         Cart cart = cartService.findByUser(user);
-        List<FishQuantityDto> cartFishQuantity = cart.getCartItems().stream()
-        .map(item -> new FishQuantityDto(item.getFish(), item.getQuantity()))
-        .collect(Collectors.toList());
+        List<NewFishRequest> cartFishQuantity = cart.getCartItems().stream()
+                .map(item -> new NewFishRequest(item.getFish(), item.getQuantity()))
+                .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(cartFishQuantity);
     }
-
-
 
     @PostMapping("/{fishId}/{quantity}")
     public ResponseEntity<Void> addOrUpdateItem(@PathVariable int fishId, @PathVariable int quantity,

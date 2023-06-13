@@ -20,7 +20,7 @@ public class CartService {
 
     public Cart findByUser(User user) {
         Optional<Cart> optionalCart = cartRepository.findByUser(user);
-        
+
         if (optionalCart.isPresent()) {
             return optionalCart.get();
         } else {
@@ -31,7 +31,7 @@ public class CartService {
     public Cart addOrUpdateItem(User user, Fish fish, int quantity) {
         Cart cart = findByUser(user);
         boolean updated = false;
-    
+
         for (CartItem item : cart.getCartItems()) {
             if (item.getFish().equals(fish)) {
                 int updatedQuantity = item.getQuantity() + quantity;
@@ -41,7 +41,7 @@ public class CartService {
                 break;
             }
         }
-    
+
         if (!updated) {
             CartItem item = new CartItem();
             item.setCart(cart);
@@ -50,10 +50,10 @@ public class CartService {
             CartItem savedItem = cartItemService.saveOrUpdateCartItem(cart, fish, quantity);
             cart.getCartItems().add(savedItem);
         }
-    
+
         cart.updateTotal();
         cartRepository.save(cart);
-    
+
         return cart;
     }
 
@@ -72,4 +72,8 @@ public class CartService {
         cart.setUser(user);
         return cartRepository.save(cart);
     }
+
+    // public void clearCart(User user) {
+    // this.cartRepository.clearCart(user);
+    // }
 }

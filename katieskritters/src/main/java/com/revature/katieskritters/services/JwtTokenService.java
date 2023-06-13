@@ -19,7 +19,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 
-
 @Service
 public class JwtTokenService {
     @Value("${jwt.secret}")
@@ -52,5 +51,4 @@ public class JwtTokenService {
             throw new JwtException("Invalid token");
         }
     }
-
 }

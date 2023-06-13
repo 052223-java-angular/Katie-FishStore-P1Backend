@@ -20,11 +20,11 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "cart_item")
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int cartItem_id;
 
     @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)

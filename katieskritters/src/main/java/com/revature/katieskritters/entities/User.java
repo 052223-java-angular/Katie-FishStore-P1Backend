@@ -43,8 +43,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonBackReference
@@ -63,5 +61,4 @@ public class User {
     public String getId() {
         return this.user_id;
     }
-
 }
