@@ -1,5 +1,7 @@
 package com.revature.katieskritters.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,10 +28,12 @@ public class Favorite {
     private int favorite_id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "fish_id", nullable = false)
     private Fish fish;
 }
